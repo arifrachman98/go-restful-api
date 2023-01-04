@@ -78,7 +78,7 @@
         },
         "/categories/{categoryID}" : {
             "get" :{
-                "tags": ["Category API"],
+                "tags": ["Category API by ID"],
                 "summary": "Get category by ID",
                 "description": "Get category by ID",
                 "parameters": [
@@ -115,7 +115,7 @@
                 }
             },
             "put" :{
-                "tags": ["Category API"],
+                "tags": ["Category API by ID"],
                 "summary": "Update category by ID",
                 "description": "Update category by ID",
                 "parameters":[
@@ -152,6 +152,38 @@
                                         },
                                         "data" :{
                                             "$ref" : "#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "tags": ["Category API by ID"],
+                "summary": "Delete Category by ID",
+                "description": "Delete category by ID",
+                "parameters": [
+                    {
+                        "name": "categoryID",
+                        "in": "path",
+                        "description": "Category ID"
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Success get category by ID",
+                        "content": {
+                            "application/json" :{
+                                "schema" :{
+                                    "type": "object",
+                                    "properties": {
+                                        "code" :{
+                                            "type": "number"
+                                        },
+                                        "status" : {
+                                            "type": "string"
                                         }
                                     }
                                 }
