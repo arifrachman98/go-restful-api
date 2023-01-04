@@ -11,7 +11,9 @@
     "paths": {
         "/categories" : {
             "get" : {
+                "tags": ["Category API"],
                 "description": "List All categories",
+                "summary": "List All categories",
                 "responses": {
                     "200" : {
                         "description": "Success get all categories",
@@ -27,23 +29,69 @@
                                             "type": "string"
                                         },
                                         "data" : {
-                                            "type": "array",
-                                            "items" : {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id" : {
-                                                        "type": "number"
-                                                    },
-                                                    "name" : {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
+                                            "$ref" : "#/components/schemas/Category"
                                         }
                                     }
                                 }
                             }
                         }
+                    }
+                }
+            },
+            "post" : {
+                "tags": ["Category API"],
+                "description": "Create new categories",
+                "summary": "Create new categories",
+                "requestBody" :{
+                    "content": {
+                        "application/json" : {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "name" : {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Success Create Category",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code" : {
+                                            "type": "number"
+                                        },
+                                        "status" : {
+                                            "type": "string"
+                                        },
+                                        "data" : {
+                                            "$ref" : "#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category" : {
+                "type": "object",
+                "properties": {
+                    "id" :{
+                        "type": "number"
+                    },
+                    "name" : {
+                        "type": "string"
                     }
                 }
             }
