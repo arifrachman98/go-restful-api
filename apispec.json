@@ -1,11 +1,12 @@
 {
     "openapi":"3.0.2",
     "info": {
-      "title":"API Title",
+      "title":"Category RESTful API",
+      "description" : "API Spec for Category RESTful API",
       "version":"1.0"
     },
     "servers": [
-      {"url":"https://api.server.test/v1"}
+      {"url":"http://localhost:8080/api"}
     ],
     "paths": {
     }
