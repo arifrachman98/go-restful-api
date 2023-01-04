@@ -46,12 +46,7 @@
                     "content": {
                         "application/json" : {
                             "schema":{
-                                "type": "object",
-                                "properties": {
-                                    "name" : {
-                                        "type": "string"
-                                    }
-                                }
+                                "$ref" : "#/components/schemas/CoUcategory"
                             }
                         }
                     }
@@ -80,10 +75,103 @@
                     }
                 }
             }
+        },
+        "/categories/{categoryID}" : {
+            "get" :{
+                "tags": ["Category API"],
+                "summary": "Get category by ID",
+                "description": "Get category by ID",
+                "parameters": [
+                    {
+                        "schema":{},
+                        "required": true,
+                        "name": "categoryID",
+                        "in": "path",
+                        "description": "Category ID"
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Success get category by ID",
+                        "content": {
+                            "application/json" :{
+                                "schema" :{
+                                    "type": "object",
+                                    "properties": {
+                                        "code" :{
+                                            "type": "number"
+                                        },
+                                        "status" : {
+                                            "type": "string"
+                                        },
+                                        "data" :{
+                                            "$ref" : "#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put" :{
+                "tags": ["Category API"],
+                "summary": "Update category by ID",
+                "description": "Update category by ID",
+                "parameters":[
+                    {
+                        "schema" :{},
+                        "required": true,
+                        "name": "categoryID",
+                        "in": "path",
+                        "description": "Category ID"
+                    }
+                ],
+                "requestBody" :{
+                    "content": {
+                        "application/json" :{
+                            "schema" :{
+                                "$ref" : "#/components/schemas/CoUcategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Success get category by ID",
+                        "content": {
+                            "application/json" :{
+                                "schema" :{
+                                    "type": "object",
+                                    "properties": {
+                                        "code" :{
+                                            "type": "number"
+                                        },
+                                        "status" : {
+                                            "type": "string"
+                                        },
+                                        "data" :{
+                                            "$ref" : "#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "CoUcategory" : {
+                "type": "object",
+                "properties": {
+                    "name" : {
+                        "type": "string"
+                    }
+                }
+            },
             "Category" : {
                 "type": "object",
                 "properties": {
