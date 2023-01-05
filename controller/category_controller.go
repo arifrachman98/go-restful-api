@@ -7,9 +7,9 @@ import (
 )
 
 type CategoryController interface {
-	Create(w http.ResponseWriter, r *http.Request, p httprouter.Param)
-	Update(w http.ResponseWriter, r *http.Request, p httprouter.Param)
-	Delete(w http.ResponseWriter, r *http.Request, p httprouter.Param)
-	FindById(w http.ResponseWriter, r *http.Request, p httprouter.Param)
-	FindAll(w http.ResponseWriter, r *http.Request, p httprouter.Param)
+	Create(w http.ResponseWriter, r *http.Request, p httprouter.Params)
+	Update(w http.ResponseWriter, r *http.Request, p httprouter.Params)
+	Delete(w http.ResponseWriter, r *http.Request, p httprouter.Params)
+	FindById(w http.ResponseWriter, r *http.Request, p httprouter.Params)
+	FindAll(w http.ResponseWriter, r *http.Request, p httprouter.Params)
 }
