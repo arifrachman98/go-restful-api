@@ -60,13 +60,50 @@ func (c *CategoryControllerImpl) Update(w http.ResponseWriter, r *http.Request, 
 }
 
 func (c *CategoryControllerImpl) Delete(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	categoryID := p.ByName("categoryId")
+	id, err := strconv.Atoi(categoryID)
+	helper.PanicHelper(err)
 
+	c.CategoryService.Delete(r.Context(), id)
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+	}
+
+	w.Header().Add("Content-Type", "application/json")
+	endcode := json.NewEncoder(w)
+	err = endcode.Encode(webResponse)
+	helper.PanicHelper(err)
 }
 
 func (c *CategoryControllerImpl) FindById(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	categoryID := p.ByName("categoryId")
+	id, err := strconv.Atoi(categoryID)
+	helper.PanicHelper(err)
 
+	categoryResponse := c.CategoryService.FindByID(r.Context(), id)
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   categoryResponse,
+	}
+
+	w.Header().Add("Content-Type", "application/json")
+	endcode := json.NewEncoder(w)
+	err = endcode.Encode(webResponse)
+	helper.PanicHelper(err)
 }
 
 func (c *CategoryControllerImpl) FindAll(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	categoryResponses := c.CategoryService.FindAll(r.Context())
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   categoryResponses,
+	}
 
+	w.Header().Add("Content-Type", "application/json")
+	endcode := json.NewEncoder(w)
+	err := endcode.Encode(webResponse)
+	helper.PanicHelper(err)
 }
