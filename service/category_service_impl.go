@@ -8,14 +8,19 @@ import (
 	"github.com/arifrachman98/go-restful-api/model/domain"
 	"github.com/arifrachman98/go-restful-api/model/web"
 	"github.com/arifrachman98/go-restful-api/repository"
+	"github.com/go-playground/validator/v10"
 )
 
 type CategoryServiceImpl struct {
 	CategoryRepository repository.CategoryRepository
 	DB                 *sql.DB
+	Validate           *validator.Validate
 }
 
 func (service *CategoryServiceImpl) Create(c context.Context, r web.CategoryCreateRequest) web.CategoryResponse {
+	err := service.Validate.Struct(r)
+	helper.PanicHelper(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicHelper(err)
 	defer helper.CommitOrRollback(tx)
@@ -30,6 +35,9 @@ func (service *CategoryServiceImpl) Create(c context.Context, r web.CategoryCrea
 }
 
 func (service *CategoryServiceImpl) Update(c context.Context, r web.CategoryUpdateRequest) web.CategoryResponse {
+	err := service.Validate.Struct(r)
+	helper.PanicHelper(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicHelper(err)
 	defer helper.CommitOrRollback(tx)
