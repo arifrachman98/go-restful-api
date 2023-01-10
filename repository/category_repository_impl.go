@@ -17,7 +17,7 @@ func NewCategoryRepository() CategoryRepository {
 }
 
 func (repository *CategoryRepositoryImpl) Save(c context.Context, tx *sql.Tx, category domain.Category) domain.Category {
-	sql := "insert into customer(name) values (?)"
+	sql := "insert into category(name) values (?)"
 	res, err := tx.ExecContext(c, sql, category.Name)
 	helper.PanicHelper(err)
 
