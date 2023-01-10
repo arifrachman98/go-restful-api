@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -23,7 +22,7 @@ func NewCategoryController(cService service.CategoryService) CategoryController 
 
 func (c *CategoryControllerImpl) Create(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	categoryCreateRequest := web.CategoryCreateRequest{}
-	helper.ReadFromRequestBody(r, categoryCreateRequest)
+	helper.ReadFromRequestBody(r, &categoryCreateRequest)
 
 	categoryResponse := c.CategoryService.Create(r.Context(), categoryCreateRequest)
 	webResponse := web.WebResponse{
@@ -32,10 +31,7 @@ func (c *CategoryControllerImpl) Create(w http.ResponseWriter, r *http.Request, 
 		Data:   categoryResponse,
 	}
 
-	w.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(w)
-	err := encoder.Encode(webResponse)
-	helper.PanicHelper(err)
+	helper.WriteToResponseBody(w, webResponse)
 }
 
 func (c *CategoryControllerImpl) Update(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
