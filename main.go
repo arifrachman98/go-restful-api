@@ -7,7 +7,9 @@ import (
 
 	"github.com/arifrachman98/go-restful-api/app"
 	"github.com/arifrachman98/go-restful-api/controller"
+	"github.com/arifrachman98/go-restful-api/exception"
 	"github.com/arifrachman98/go-restful-api/helper"
+	"github.com/arifrachman98/go-restful-api/middleware"
 	"github.com/arifrachman98/go-restful-api/repository"
 	"github.com/arifrachman98/go-restful-api/service"
 	"github.com/go-playground/validator/v10"
@@ -23,10 +25,11 @@ func main() {
 	cController := controller.NewCategoryController(cService)
 
 	router := app.NewRouter(cController)
+	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
