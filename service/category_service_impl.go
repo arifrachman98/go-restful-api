@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/arifrachman98/go-restful-api/exception"
 	"github.com/arifrachman98/go-restful-api/helper"
 	"github.com/arifrachman98/go-restful-api/model/domain"
 	"github.com/arifrachman98/go-restful-api/model/web"
@@ -51,7 +52,11 @@ func (service *CategoryServiceImpl) Update(c context.Context, r web.CategoryUpda
 	defer helper.CommitOrRollback(tx)
 
 	category, err := service.CategoryRepository.FindById(c, tx, r.Id)
-	helper.PanicHelper(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
+
+	category.Name = r.Name
 
 	category = service.CategoryRepository.Update(c, tx, category)
 
@@ -64,7 +69,9 @@ func (service *CategoryServiceImpl) Delete(c context.Context, categoryID int) {
 	defer helper.CommitOrRollback(tx)
 
 	category, err := service.CategoryRepository.FindById(c, tx, categoryID)
-	helper.PanicHelper(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.CategoryRepository.Delete(c, tx, category)
 }
@@ -75,7 +82,9 @@ func (service *CategoryServiceImpl) FindByID(c context.Context, categoryID int) 
 	defer helper.CommitOrRollback(tx)
 
 	category, err := service.CategoryRepository.FindById(c, tx, categoryID)
-	helper.PanicHelper(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToCategoryResponse(category)
 }
