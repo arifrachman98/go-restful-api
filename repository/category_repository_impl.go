@@ -46,6 +46,7 @@ func (repository *CategoryRepositoryImpl) FindById(c context.Context, tx *sql.Tx
 	sql := "select id, name from category where id = ?"
 	rows, err := tx.QueryContext(c, sql, categoryID)
 	helper.PanicHelper(err)
+	defer rows.Close()
 
 	categ := domain.Category{}
 	if rows.Next() {
@@ -61,6 +62,7 @@ func (repository *CategoryRepositoryImpl) FindAll(c context.Context, tx *sql.Tx)
 	sql := "select id, name from category"
 	rows, err := tx.QueryContext(c, sql)
 	helper.PanicHelper(err)
+	defer rows.Close()
 
 	var categories []domain.Category
 
