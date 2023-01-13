@@ -13,3 +13,13 @@ func InitializedService(isError bool) (*SimpleService, error) {
 	)
 	return nil, nil
 }
+
+func InitDatabaseRepos() *DatabaseRepository {
+	wire.Build(
+		NewDatabasePostgres,
+		NewDatabaseMysql,
+		NewDatabaseRepository,
+	)
+
+	return nil
+}
