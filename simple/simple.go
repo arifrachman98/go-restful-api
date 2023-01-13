@@ -11,7 +11,9 @@ type SimpleService struct {
 }
 
 func NewSimpleRepository() *SimpleRepository {
-	return &SimpleRepository{}
+	return &SimpleRepository{
+		Error: true,
+	}
 }
 
 func NewSimpleService(repository *SimpleRepository) (*SimpleService, error) {
