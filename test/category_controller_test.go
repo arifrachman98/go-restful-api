@@ -274,7 +274,7 @@ func TestDeleteCategoryFailed(t *testing.T) {
 	router.ServeHTTP(recorder, r)
 
 	response := recorder.Result()
-	assert.Equal(t, 200, response.StatusCode)
+	assert.Equal(t, 404, response.StatusCode)
 
 	body, _ := io.ReadAll(response.Body)
 
