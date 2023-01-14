@@ -96,3 +96,12 @@ func InitConfiguration() *Configuration {
 	)
 	return nil
 }
+
+func InitConnection(name string) (*Connection, func()) {
+	wire.Build(
+		NewConnection,
+		NewFile,
+	)
+
+	return nil, nil
+}
