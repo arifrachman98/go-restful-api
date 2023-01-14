@@ -85,3 +85,14 @@ func InitReader() io.Reader {
 	)
 	return nil
 }
+
+func InitConfiguration() *Configuration {
+	wire.Build(
+		NewApplication,
+		wire.FieldsOf(
+			new(*Application),
+			"Configuration",
+		),
+	)
+	return nil
+}
