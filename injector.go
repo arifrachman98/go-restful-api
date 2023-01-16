@@ -24,8 +24,12 @@ var categorySet = wire.NewSet(
 	wire.Bind(new(controller.CategoryController), new(*controller.CategoryControllerImpl)),
 )
 
-func InitServer() *http.Server {
-	wire.Build(app.NewDB, validator.New, categorySet, app.NewRouter,
+func InitializedServer() *http.Server {
+	wire.Build(
+		app.NewDB,
+		validator.New,
+		categorySet,
+		app.NewRouter,
 		wire.Bind(new(http.Handler), new(*httprouter.Router)),
 		middleware.NewAuthMiddleware,
 		NewServer,
