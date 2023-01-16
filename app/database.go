@@ -31,3 +31,11 @@ func NewDB() *sql.DB {
 	! Migrate down
 	* * migrate -database "mysql://root@tcp(localhost:3306)/go_database_migration" -path db/migrations down
 */
+
+/*
+	! Check version of migrate state
+	* migrate -database "mysql://root@tcp(localhost:3306)/go_database_migration" -path db/migrations version
+
+	! Rollback version of migrate state
+	* migrate -database "mysql://root@tcp(localhost:3306)/go_database_migration" -path db/migrations force 20230116175811
+*/
