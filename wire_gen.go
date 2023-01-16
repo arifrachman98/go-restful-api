@@ -23,7 +23,7 @@ import (
 
 // Injectors from injector.go:
 
-func InitServer() *http.Server {
+func InitializedServer() *http.Server {
 	categoryRepositoryImpl := repository.NewCategoryRepository()
 	db := app.NewDB()
 	validate := validator.New()
