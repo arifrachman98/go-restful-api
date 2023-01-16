@@ -20,9 +20,14 @@ func NewDB() *sql.DB {
 }
 
 /*
+	! Create Migrate
+	* migrate create -ext sql -dir db/migrations create_table_category
+*/
+
+/*
 	! Migrate up
 	* migrate -database "mysql://root@tcp(localhost:3306)/go_database_migration" -path db/migrations up
 
-	!Migrate down
+	! Migrate down
 	* * migrate -database "mysql://root@tcp(localhost:3306)/go_database_migration" -path db/migrations down
 */
