@@ -1,5 +1,6 @@
-CREATE TABLE category(
-    id int not null auto_increment,
-    name varchar(255) not nul,
-    primary key(id)
-)engine = innodb;
+CREATE TABLE category
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+)ENGINE = InnoDB;
