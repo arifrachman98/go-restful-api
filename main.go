@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/arifrachman98/go-restful-api/helper"
@@ -17,6 +18,7 @@ func NewServer(AuthMiddleware *middleware.AuthMiddleware) *http.Server {
 
 func main() {
 	server := InitializedServer()
+	fmt.Printf("Listening on port :3000")
 	err := server.ListenAndServe()
 	helper.PanicHelper(err)
 }
